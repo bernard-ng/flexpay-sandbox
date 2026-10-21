@@ -1,0 +1,10 @@
+/target
+/data
+.env
+/frontend/node_modules
+/frontend/dist
+/frontend/.tanstack
+/frontend/.output
+*.db
+*.db-shm
+*.db-wal

@@ -1,0 +1,431 @@
+{
+  "version": 1,
+  "skills": {
+    "apply-design-patterns": {
+      "source": "bernard-ng/skills",
+      "sourceType": "github",
+      "skillPath": "skills/engineering/apply-design-patterns/SKILL.md",
+      "computedHash": "7883601ab5f274fbc15b0ddbdd669a2e825b56ca0b861306d85611560657ef3d"
+    },
+    "assign-object-responsibilities": {
+      "source": "bernard-ng/skills",
+      "sourceType": "github",
+      "skillPath": "skills/engineering/assign-object-responsibilities/SKILL.md",
+      "computedHash": "00565b202bd6c1987c15948b9e02a0f4158ef68e158bbd92c3da99865ff04bb5"
+    },
+    "build-ubiquitous-language": {
+      "source": "bernard-ng/skills",
+      "sourceType": "github",
+      "skillPath": "skills/engineering/build-ubiquitous-language/SKILL.md",
+      "computedHash": "f6dcb6bef4ca7992e2cc939f8ae7624b92dd644c931612b50dab888f6041813b"
+    },
+    "choose-control-style": {
+      "source": "bernard-ng/skills",
+      "sourceType": "github",
+      "skillPath": "skills/engineering/choose-control-style/SKILL.md",
+      "computedHash": "b220ff47aebe97511e48af08cf44c60137c3f2373774a44fd30d562b81ad8b23"
+    },
+    "code-review": {
+      "source": "mattpocock/skills",
+      "sourceType": "github",
+      "skillPath": "skills/engineering/code-review/SKILL.md",
+      "computedHash": "57cfd4ceb011f05e58a1a4f4cad3b2e03419d371f8990f4bcb32ff0d435a039f"
+    },
+    "codebase-design": {
+      "source": "mattpocock/skills",
+      "sourceType": "github",
+      "skillPath": "skills/engineering/codebase-design/SKILL.md",
+      "computedHash": "b2888e4f4e8c0af3bfd557575a64b905c44e6248c3101d72077816882b3a92b9"
+    },
+    "coding-guidelines": {
+      "source": "actionbook/rust-skills",
+      "sourceType": "github",
+      "skillPath": "skills/coding-guidelines/SKILL.md",
+      "computedHash": "0742312a0de5eb6bd84e093c1815b1db98126130b92713ea5fc2cf902338aa3b"
+    },
+    "core-actionbook": {
+      "source": "actionbook/rust-skills",
+      "sourceType": "github",
+      "skillPath": "skills/core-actionbook/SKILL.md",
+      "computedHash": "52f2dc1a62a5a9fe071265e14cd29dc2e6a01492fe7e434af21bcd833d84d541"
+    },
+    "core-agent-browser": {
+      "source": "actionbook/rust-skills",
+      "sourceType": "github",
+      "skillPath": "skills/core-agent-browser/SKILL.md",
+      "computedHash": "e373a42fc0a9b586463bc26c0416b64b43a62bd9e064215fa82ee19c116b9d27"
+    },
+    "core-dynamic-skills": {
+      "source": "actionbook/rust-skills",
+      "sourceType": "github",
+      "skillPath": "skills/core-dynamic-skills/SKILL.md",
+      "computedHash": "7663df4de3177c4ec2395afdb2c5b769cf35b05711040bec1b745c5f94f53fe5"
+    },
+    "core-fix-skill-docs": {
+      "source": "actionbook/rust-skills",
+      "sourceType": "github",
+      "skillPath": "skills/core-fix-skill-docs/SKILL.md",
+      "computedHash": "3794d89554650ac94bc9eef7330bc0806a17b1c907fac9508a1caafbdb7f0d2c"
+    },
+    "define-shared-roles": {
+      "source": "bernard-ng/skills",
+      "sourceType": "github",
+      "skillPath": "skills/engineering/define-shared-roles/SKILL.md",
+      "computedHash": "6421b94eb166c5b199c9a70ffee032ec9f378b0590eb89a8f812bd27a935cd52"
+    },
+    "describe-object-collaborations": {
+      "source": "bernard-ng/skills",
+      "sourceType": "github",
+      "skillPath": "skills/engineering/describe-object-collaborations/SKILL.md",
+      "computedHash": "73ec619eadac5872fcd028ee3d0114c34eda8cf788f22b41f202ac1d12e54aeb"
+    },
+    "design-aggregates": {
+      "source": "bernard-ng/skills",
+      "sourceType": "github",
+      "skillPath": "skills/engineering/design-aggregates/SKILL.md",
+      "computedHash": "ce5d02a3ea77e649d4235baabc9dca6da011794a6686020fbe155ec3b4e37880"
+    },
+    "design-object-connections": {
+      "source": "bernard-ng/skills",
+      "sourceType": "github",
+      "skillPath": "skills/engineering/design-object-connections/SKILL.md",
+      "computedHash": "927847c1c30a8decde72c3386f471cd07fd9fcf39a4de473e94bc4fcc8b59296"
+    },
+    "design-reliable-collaborations": {
+      "source": "bernard-ng/skills",
+      "sourceType": "github",
+      "skillPath": "skills/engineering/design-reliable-collaborations/SKILL.md",
+      "computedHash": "8e5bf2d77ec08321252b54047ab2a308bdc4333b5726f667ffa8f5a93bfdce0c"
+    },
+    "design-variation-points": {
+      "source": "bernard-ng/skills",
+      "sourceType": "github",
+      "skillPath": "skills/engineering/design-variation-points/SKILL.md",
+      "computedHash": "b0c46f11b1caae1b8972aecd8e4277566a284d380d7d3c62f743eb676c098c58"
+    },
+    "diagnosing-bugs": {
+      "source": "mattpocock/skills",
+      "sourceType": "github",
+      "skillPath": "skills/engineering/diagnosing-bugs/SKILL.md",
+      "computedHash": "ede7254edbd22fcab97a0941511f7d440d8f9a249348fea97c50987ad5501674"
+    },
+    "discover-object-roles": {
+      "source": "bernard-ng/skills",
+      "sourceType": "github",
+      "skillPath": "skills/engineering/discover-object-roles/SKILL.md",
+      "computedHash": "12b407847bd2cbf66f7f776eb91051d4ec79c567b3c6560e13da2bf121955a8f"
+    },
+    "distill-core-domain": {
+      "source": "bernard-ng/skills",
+      "sourceType": "github",
+      "skillPath": "skills/engineering/distill-core-domain/SKILL.md",
+      "computedHash": "cb59a0c24205085021d7f94e2764ece7eed4b834497dc6d54811063ab39d0977"
+    },
+    "domain-cli": {
+      "source": "actionbook/rust-skills",
+      "sourceType": "github",
+      "skillPath": "skills/domain-cli/SKILL.md",
+      "computedHash": "88a6efe282b5105161c8ddb320f09ca0ffed19323fe403dfa7adb4aaa708b8dc"
+    },
+    "domain-cloud-native": {
+      "source": "actionbook/rust-skills",
+      "sourceType": "github",
+      "skillPath": "skills/domain-cloud-native/SKILL.md",
+      "computedHash": "10a6e60e8d2a1b977fc5d5935976c17b498335ee2f19255438e45fd15a8811bc"
+    },
+    "domain-driven-design": {
+      "source": "bernard-ng/skills",
+      "sourceType": "github",
+      "skillPath": "skills/engineering/domain-driven-design/SKILL.md",
+      "computedHash": "62f2b15b73e0b4d5bd4a56c49c73020b5351a9ff1b92bebb5b3b3a89af1b4c37"
+    },
+    "domain-embedded": {
+      "source": "actionbook/rust-skills",
+      "sourceType": "github",
+      "skillPath": "skills/domain-embedded/SKILL.md",
+      "computedHash": "3d32e5d2d602f775f4a3d6bc0222d56526ec0dbc882771c80430dffdc2be6dd2"
+    },
+    "domain-fintech": {
+      "source": "actionbook/rust-skills",
+      "sourceType": "github",
+      "skillPath": "skills/domain-fintech/SKILL.md",
+      "computedHash": "c2fbfc41eafd81d828dead9f6988e63a544697d6961e673e563d08d47b7a17f5"
+    },
+    "domain-iot": {
+      "source": "actionbook/rust-skills",
+      "sourceType": "github",
+      "skillPath": "skills/domain-iot/SKILL.md",
+      "computedHash": "4a8aaf6e1bebbd1984faf04e6dc0cb3b309409628b090ce72b63c807e9b76e4e"
+    },
+    "domain-ml": {
+      "source": "actionbook/rust-skills",
+      "sourceType": "github",
+      "skillPath": "skills/domain-ml/SKILL.md",
+      "computedHash": "e53c7de1916555fe903c40270208a88e2350f8e5c2f81c5115059ccf4278cca1"
+    },
+    "domain-modeling": {
+      "source": "mattpocock/skills",
+      "sourceType": "github",
+      "skillPath": "skills/engineering/domain-modeling/SKILL.md",
+      "computedHash": "b3eb40152b81f0c98fd2095a023c019452dbdce56f7540cc67fece2972db8369"
+    },
+    "domain-web": {
+      "source": "actionbook/rust-skills",
+      "sourceType": "github",
+      "skillPath": "skills/domain-web/SKILL.md",
+      "computedHash": "dd853ce97875f139da437df6e09eaca8b326931a98f3eb8dc02669670c12161d"
+    },
+    "evolve-large-scale-structure": {
+      "source": "bernard-ng/skills",
+      "sourceType": "github",
+      "skillPath": "skills/engineering/evolve-large-scale-structure/SKILL.md",
+      "computedHash": "7e0a5cc28a60cd2a31f548b0af88a6c2ef2be9374bfe5a827861e9c50f5fea7e"
+    },
+    "frame-design-problem": {
+      "source": "bernard-ng/skills",
+      "sourceType": "github",
+      "skillPath": "skills/engineering/frame-design-problem/SKILL.md",
+      "computedHash": "8c7c92f6ca2e41d4d215f2bf5ed31087c4ba20b22f852adb720688cdfdb5d5e2"
+    },
+    "grill-me": {
+      "source": "mattpocock/skills",
+      "sourceType": "github",
+      "skillPath": "skills/productivity/grill-me/SKILL.md",
+      "computedHash": "9cdbb4b8f7a3aeaef82e6230c9e823500d4a8a1214c726cf342cf9829d34fc7d"
+    },
+    "grilling": {
+      "source": "mattpocock/skills",
+      "sourceType": "github",
+      "skillPath": "skills/productivity/grilling/SKILL.md",
+      "computedHash": "ef1641a2047b71b60f1942cd35efb47d3afc9d584dff5a0b01f8c7db923aaa08"
+    },
+    "improve": {
+      "source": "shadcn/improve",
+      "sourceType": "github",
+      "skillPath": "skills/improve/SKILL.md",
+      "computedHash": "39a9358732dcff385e9e4d3e60b4547856f834e54a58b35e455aa9bd49928c13"
+    },
+    "m01-ownership": {
+      "source": "actionbook/rust-skills",
+      "sourceType": "github",
+      "skillPath": "skills/m01-ownership/SKILL.md",
+      "computedHash": "69f57ede558e32e703e468ef5328f5bcc6610adff9d99b49984a5b3507d31b5b"
+    },
+    "m02-resource": {
+      "source": "actionbook/rust-skills",
+      "sourceType": "github",
+      "skillPath": "skills/m02-resource/SKILL.md",
+      "computedHash": "b79e4a7702adb7c7622dfab7818dd81710352d448d285885946652e5dc73fd5b"
+    },
+    "m03-mutability": {
+      "source": "actionbook/rust-skills",
+      "sourceType": "github",
+      "skillPath": "skills/m03-mutability/SKILL.md",
+      "computedHash": "78eb8bc5e8b9bbeb5a59375b74b773c8fe824bb1644fa0fb77e99a1255a272ab"
+    },
+    "m04-zero-cost": {
+      "source": "actionbook/rust-skills",
+      "sourceType": "github",
+      "skillPath": "skills/m04-zero-cost/SKILL.md",
+      "computedHash": "8bc6733618b217b608fe5011f4c74b7ceb8c0765ba60702e30fa8fa4824584f2"
+    },
+    "m05-type-driven": {
+      "source": "actionbook/rust-skills",
+      "sourceType": "github",
+      "skillPath": "skills/m05-type-driven/SKILL.md",
+      "computedHash": "06a52b0f35951cd01e21b2906917061f3994ece6b8c6b055dca65bbe14820283"
+    },
+    "m06-error-handling": {
+      "source": "actionbook/rust-skills",
+      "sourceType": "github",
+      "skillPath": "skills/m06-error-handling/SKILL.md",
+      "computedHash": "e6639bd5913e63bd8315f7b36f5dd22a029cae2404135a75ac24c0627a93e4e5"
+    },
+    "m07-concurrency": {
+      "source": "actionbook/rust-skills",
+      "sourceType": "github",
+      "skillPath": "skills/m07-concurrency/SKILL.md",
+      "computedHash": "6ff3b31bae02e84238a75845008150122071ba449b23edb9ea8a50e3635fffb7"
+    },
+    "m09-domain": {
+      "source": "actionbook/rust-skills",
+      "sourceType": "github",
+      "skillPath": "skills/m09-domain/SKILL.md",
+      "computedHash": "ce0ed9b5b5c12775c6c04423c79c8a542638629237ad2447a3c6569accf1a15a"
+    },
+    "m10-performance": {
+      "source": "actionbook/rust-skills",
+      "sourceType": "github",
+      "skillPath": "skills/m10-performance/SKILL.md",
+      "computedHash": "c0e093f630ec71079aa7a138af376821e3cc24dfb129f7162e82d854e26a1087"
+    },
+    "m11-ecosystem": {
+      "source": "actionbook/rust-skills",
+      "sourceType": "github",
+      "skillPath": "skills/m11-ecosystem/SKILL.md",
+      "computedHash": "7ac5dd7206c339379d0aafe304a473a2e54465374be269ffc97d9e615325fc69"
+    },
+    "m12-lifecycle": {
+      "source": "actionbook/rust-skills",
+      "sourceType": "github",
+      "skillPath": "skills/m12-lifecycle/SKILL.md",
+      "computedHash": "e360c0db5b5bf8e47d418e0a4a6ce33de7725b40eb126e6266f9fedfbccff291"
+    },
+    "m13-domain-error": {
+      "source": "actionbook/rust-skills",
+      "sourceType": "github",
+      "skillPath": "skills/m13-domain-error/SKILL.md",
+      "computedHash": "fc90102a877b830f24735d649c5042ad74423e04ed64f1f1e44df776c7880932"
+    },
+    "m14-mental-model": {
+      "source": "actionbook/rust-skills",
+      "sourceType": "github",
+      "skillPath": "skills/m14-mental-model/SKILL.md",
+      "computedHash": "6c53f050376c04a4abb5edce769a7052d93f605cc06299e657d9fce5b01edbab"
+    },
+    "m15-anti-pattern": {
+      "source": "actionbook/rust-skills",
+      "sourceType": "github",
+      "skillPath": "skills/m15-anti-pattern/SKILL.md",
+      "computedHash": "d9f5d80bd2ab49f063a61d90a96100298788ea0e1e5bd5e917be3c7e124078a2"
+    },
+    "make-implicit-concepts-explicit": {
+      "source": "bernard-ng/skills",
+      "sourceType": "github",
+      "skillPath": "skills/engineering/make-implicit-concepts-explicit/SKILL.md",
+      "computedHash": "9288cd4dce818ccee57380f0f675d1fe48502af87672c974147e7fd36a46d70d"
+    },
+    "map-bounded-contexts": {
+      "source": "bernard-ng/skills",
+      "sourceType": "github",
+      "skillPath": "skills/engineering/map-bounded-contexts/SKILL.md",
+      "computedHash": "339fe9a3f97241de467285a0b2a6e6219a00226c3105006a695c1dca5bc51275"
+    },
+    "meta-cognition-parallel": {
+      "source": "actionbook/rust-skills",
+      "sourceType": "github",
+      "skillPath": "skills/meta-cognition-parallel/SKILL.md",
+      "computedHash": "6e3006df76c15c95d64b2b52a39735ec14c6eb398192b3129aebda6fa923fd2f"
+    },
+    "model-domain-building-blocks": {
+      "source": "bernard-ng/skills",
+      "sourceType": "github",
+      "skillPath": "skills/engineering/model-domain-building-blocks/SKILL.md",
+      "computedHash": "aa18e169da11da5a774131b6949312337f92e80bcefd9d4513b6bbc55025faee"
+    },
+    "name-design-objects": {
+      "source": "bernard-ng/skills",
+      "sourceType": "github",
+      "skillPath": "skills/engineering/name-design-objects/SKILL.md",
+      "computedHash": "bb83b3c2c4cb31ce3c16b5436580094e2b8ec08b3829d969391163e7a81f05df"
+    },
+    "place-objects-in-layers": {
+      "source": "bernard-ng/skills",
+      "sourceType": "github",
+      "skillPath": "skills/engineering/place-objects-in-layers/SKILL.md",
+      "computedHash": "52f3752d66290b967064eb0cc80e7274ef3c8b76201269dc04d47c044238ca81"
+    },
+    "refactor-toward-deeper-insight": {
+      "source": "bernard-ng/skills",
+      "sourceType": "github",
+      "skillPath": "skills/engineering/refactor-toward-deeper-insight/SKILL.md",
+      "computedHash": "502c2911cad0f012260c0f418ed03fbda4e2d9677b6995167ab3e4da5ca629aa"
+    },
+    "responsibility-driven-design": {
+      "source": "bernard-ng/skills",
+      "sourceType": "github",
+      "skillPath": "skills/engineering/responsibility-driven-design/SKILL.md",
+      "computedHash": "ee220184a733ad3159d71210d32ab17aceee6cadd5b2b77cd5ba660786ba3ad9"
+    },
+    "review-object-design": {
+      "source": "bernard-ng/skills",
+      "sourceType": "github",
+      "skillPath": "skills/engineering/review-object-design/SKILL.md",
+      "computedHash": "9acdfba44b1e071fc19935bb009dddda38d407e410f02b9f83c37c71b3d80166"
+    },
+    "rust-call-graph": {
+      "source": "actionbook/rust-skills",
+      "sourceType": "github",
+      "skillPath": "skills/rust-call-graph/SKILL.md",
+      "computedHash": "0999fbe783c81b87ba1dc1347758bd87b5880dca0d66c69be53bbac133a4c888"
+    },
+    "rust-code-navigator": {
+      "source": "actionbook/rust-skills",
+      "sourceType": "github",
+      "skillPath": "skills/rust-code-navigator/SKILL.md",
+      "computedHash": "c5c5b9521be30a3b5a3d6fa122bf9df809af3b28760e06fa317d6afab5bb3939"
+    },
+    "rust-daily": {
+      "source": "actionbook/rust-skills",
+      "sourceType": "github",
+      "skillPath": "skills/rust-daily/SKILL.md",
+      "computedHash": "016d958078944cba2cbd3a7beff9c328abd22aebd9f3206c95fdaedac4d7103a"
+    },
+    "rust-deps-visualizer": {
+      "source": "actionbook/rust-skills",
+      "sourceType": "github",
+      "skillPath": "skills/rust-deps-visualizer/SKILL.md",
+      "computedHash": "b7cb6cbb693df52c43cae43149469ba44b05ad0747c5826c3d65f5e4b4ad3d74"
+    },
+    "rust-learner": {
+      "source": "actionbook/rust-skills",
+      "sourceType": "github",
+      "skillPath": "skills/rust-learner/SKILL.md",
+      "computedHash": "12e6434334fc6f131f09f35cbb53871d0d4c753fd404c1337e9c48ad5a9a1dbf"
+    },
+    "rust-refactor-helper": {
+      "source": "actionbook/rust-skills",
+      "sourceType": "github",
+      "skillPath": "skills/rust-refactor-helper/SKILL.md",
+      "computedHash": "614d54b2b16a57965412a3fff048c6d36e6f1535fcbb9ac2cf71e7a987e5a119"
+    },
+    "rust-router": {
+      "source": "actionbook/rust-skills",
+      "sourceType": "github",
+      "skillPath": "skills/rust-router/SKILL.md",
+      "computedHash": "787e5244b55d9d943abc49a81318bde7d1bbf88dd43bc60dc58ec74023ba3788"
+    },
+    "rust-skill-creator": {
+      "source": "actionbook/rust-skills",
+      "sourceType": "github",
+      "skillPath": "skills/rust-skill-creator/SKILL.md",
+      "computedHash": "0314bb7b61f6e7be24a498b7fb45969f78924e81c2f74723badb056724697119"
+    },
+    "rust-symbol-analyzer": {
+      "source": "actionbook/rust-skills",
+      "sourceType": "github",
+      "skillPath": "skills/rust-symbol-analyzer/SKILL.md",
+      "computedHash": "1e6b2fd668a9a9574b89cf90797bcd825636163d0f3b5fc9e678fd71ce4869b9"
+    },
+    "rust-trait-explorer": {
+      "source": "actionbook/rust-skills",
+      "sourceType": "github",
+      "skillPath": "skills/rust-trait-explorer/SKILL.md",
+      "computedHash": "2feac2b9bb17689a7227fcae62c8a20351bb5afb271a47d49c27ba87ba9e7e26"
+    },
+    "shape-supple-design": {
+      "source": "bernard-ng/skills",
+      "sourceType": "github",
+      "skillPath": "skills/engineering/shape-supple-design/SKILL.md",
+      "computedHash": "aabbeda596baa0b6fc414b00ef54a19859a2b99db4d3f1a993785248d3c250cc"
+    },
+    "solve-revealing-design-problems": {
+      "source": "bernard-ng/skills",
+      "sourceType": "github",
+      "skillPath": "skills/engineering/solve-revealing-design-problems/SKILL.md",
+      "computedHash": "1be9305d693b3b2918390ede7f8d7af1e8136cd5274119e0bf1d0c4fd050ff7f"
+    },
+    "trace-object-collaborations": {
+      "source": "bernard-ng/skills",
+      "sourceType": "github",
+      "skillPath": "skills/engineering/trace-object-collaborations/SKILL.md",
+      "computedHash": "bb0bbb465d41afb18c7e8463018c67034ac32fe235978bf4f3ca41c1d3bc6b22"
+    },
+    "unsafe-checker": {
+      "source": "actionbook/rust-skills",
+      "sourceType": "github",
+      "skillPath": "skills/unsafe-checker/SKILL.md",
+      "computedHash": "b76d79853846ea40ad42092c61de26da4561299b176768599751d5bcc13cf5db"
+    }
+  }
+}
