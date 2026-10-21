@@ -101,8 +101,18 @@ jobs:
         run: docker compose -f compose.dev.yaml down --volumes
 
   release-image:
-    name: Packaged sandbox smoke test
-    runs-on: ubuntu-24.04
+    name: Packaged sandbox smoke test (${{ matrix.arch }})
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - arch: amd64
+            platform: linux/amd64
+            runner: ubuntu-24.04
+          - arch: arm64
+            platform: linux/arm64
+            runner: ubuntu-24.04-arm
+    runs-on: ${{ matrix.runner }}
     timeout-minutes: 20
     env:
       FLEXPAY_IMAGE: flexpay-sandbox:smoke
@@ -120,10 +130,11 @@ jobs:
         with:
           context: .
           target: release
+          platforms: ${{ matrix.platform }}
           load: true
           tags: flexpay-sandbox:smoke
-          cache-from: type=gha,scope=sandbox-amd64
-          cache-to: type=gha,mode=max,scope=sandbox-amd64
+          cache-from: type=gha,scope=sandbox-${{ matrix.arch }}
+          cache-to: type=gha,mode=max,scope=sandbox-${{ matrix.arch }}
 
       - name: Check packaged dashboard and API
         run: bash .github/scripts/smoke-release.sh

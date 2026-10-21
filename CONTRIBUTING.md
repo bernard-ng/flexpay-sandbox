@@ -51,7 +51,8 @@ bash .github/scripts/smoke-release.sh
 ```
 
 The smoke test uses a disposable Compose project and volume. CI runs this test
-and a separate development Compose smoke test.
+on native AMD64 and ARM64 runners in parallel, plus a separate development
+Compose smoke test.
 
 ### Audit exception
 
@@ -111,6 +112,11 @@ Push a version tag such as `v0.1.0` or `v0.2.0-rc.1`. The release workflow rerun
 all checks before publishing `ghcr.io/bernard-ng/flexpay-sandbox` for
 `linux/amd64` and `linux/arm64`. It then creates a GitHub release with generated
 notes and a standalone `compose.prod.yaml` attachment pinned to the image digest.
+
+Image builds run in parallel on native `ubuntu-24.04` (AMD64) and
+`ubuntu-24.04-arm` (ARM64) runners, each with its own build cache. Each build
+pushes its image by digest; a final job combines both into one multi-platform
+image before publishing version tags and the release. QEMU is not required.
 
 Images receive both the Git tag (`:v0.1.0`) and the version without `v`
 (`:0.1.0`). Stable tags also update `:latest`; prereleases are marked as
