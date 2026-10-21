@@ -1,6 +1,6 @@
 use std::{sync::Arc, time::Duration};
 
-use flexpay_proxy::{AppState, model::Settings, router, store::Store};
+use flexpay_sandbox::{AppState, model::Settings, router, store::Store};
 use reqwest::Client;
 use serde_json::{Value, json};
 

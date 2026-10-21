@@ -1,4 +1,4 @@
-use flexpay_proxy::{model::Settings, store::Store};
+use flexpay_sandbox::{model::Settings, store::Store};
 
 use crate::common::{create, mobile, server};
 

@@ -1,32 +1,54 @@
-# FlexPay local sandbox
+# FlexPay Sandbox
 
 A small local FlexPay simulator for integration development: Rust/Axum API, SQLite transaction history, and a React + TanStack Start SPA dashboard with official shadcn/ui components built on Base UI (Nova preset). It implements the mobile and payout contracts from the supplied FlexPay v1.5 documentation and the card contract used by the `ngandu-dev/flexpay` TypeScript and PHP clients. It never forwards payments to FlexPay.
 
 ## Run
 
-Requires Rust 1.88+, Node 24+, and Bun 1.4.2+. From the repository root:
+Install Docker with Compose v2.32+ (Docker Desktop includes it). From the repository root:
 
 ```sh
-make setup
-make run
+docker compose up
 ```
 
-Frontend dependencies are managed with Bun and locked in `frontend/bun.lock`; `make setup` uses a frozen install. Frontend type checking uses TypeScript 7's native compiler.
+Open **http://localhost:8080**. Compose builds both projects: the frontend runs Vite, which serves the dashboard and proxies API requests to the Rust backend. Rust, Node, and Bun are installed inside the images; no local toolchains or setup command are needed.
 
-Open **http://localhost:8080**. Rust serves the built dashboard and API together; no Node server is needed at runtime. Data is saved in `data/flexpay.db`.
+SQLite data is stored in the `sandbox-data` named volume and survives container restarts and `docker compose down`. The dashboard's reset action clears transactions while keeping your test configuration.
 
-Optional configuration: copy `.env.example` to `.env`, or pass CLI flags (`cargo run -- --help`). Defaults:
+### Watch source changes
+
+```sh
+docker compose up --watch
+```
+
+Frontend changes under `frontend/src/` are synced into the container for hot reload. Rust changes under `backend/src/` rebuild and restart the backend. Dependency manifests, lockfiles, Dockerfiles, and frontend build configuration also trigger rebuilds. Backend rebuilds keep the same SQLite volume.
+
+After editing source without watch mode, use `docker compose up --build` to rebuild the images. Stop the stack with `docker compose down`.
+
+### Configuration
+
+No `.env` file is required. To customize the sandbox, copy `.env.example` to `.env` and edit the values:
 
 | Setting | Default |
 | --- | --- |
-| Bind address | `127.0.0.1:8080` |
-| Public URL (checkout links) | `http://localhost:8080` |
-| Merchant | `TESTMERCHANT` |
-| Bearer token | `test-token` |
-| Database | `data/flexpay.db` |
-| Frontend assets | `frontend/dist/client` |
+| Frontend port (`FLEXPAY_PORT`) | `8080` |
+| Public URL (`FLEXPAY_PUBLIC_URL`) | `http://localhost:8080` |
+| Merchant (`FLEXPAY_MERCHANT`) | `TESTMERCHANT` |
+| Bearer token (`FLEXPAY_TOKEN`) | `test-token` |
+| Log filter (`RUST_LOG`) | `flexpay_sandbox=info` |
 
-For UI development, run `cargo run` and `bun run --cwd frontend dev` in separate terminals. Open http://localhost:3000. The development server proxies API requests to Rust. Set `FLEXPAY_PUBLIC_URL=http://localhost:3000` if you want generated checkout links to open the live frontend. If the Rust port changes, update the development proxy in `frontend/vite.config.ts` too.
+The public URL is used for generated checkout links. Update it when changing the published port or hostname. Compose sets the backend bind address, database path, and frontend proxy target for the container network.
+
+### Native development (optional)
+
+For development outside Docker, install Rust 1.88+, Node 24+, and Bun 1.4.2+:
+
+```sh
+bun install --cwd frontend --frozen-lockfile
+bun run --cwd frontend build
+cargo run --manifest-path backend/Cargo.toml
+```
+
+The native backend serves the built frontend and uses `data/flexpay.db`, separate from the Docker volume. For frontend hot reload, run `bun run --cwd frontend dev` in another terminal and open http://localhost:3000. Set `FLEXPAY_PUBLIC_URL=http://localhost:3000` for checkout links, and use `FLEXPAY_API_URL` to override Vite's default proxy target of `http://127.0.0.1:8080`.
 
 ## Test a payment
 
@@ -41,7 +63,7 @@ curl http://localhost:8080/api/rest/v1/paymentService \
     "phone": "243810000001",
     "amount": "25.00",
     "currency": "USD",
-    "callbackUrl": "http://localhost:9000/callback"
+    "callbackUrl": "http://host.docker.internal:9000/callback"
   }'
 ```
 
@@ -101,7 +123,7 @@ Completion sends a JSON POST to the supplied `callbackUrl`, using the v1.5 field
 
 Delivery runs in the background with a 10-second timeout and no automatic retries or redirects. Inspect the HTTP result/error in transaction details, and use **Replay callback** after fixing your receiver. The receiver must be running at the supplied URL; a closed localhost port produces a recorded delivery error. Refund transitions update check status without inventing an undocumented refund callback protocol.
 
-Use `localhost` when the receiver runs on the same machine as this Rust process. If running inside containers, use a hostname reachable from that process instead.
+With Compose, use `http://host.docker.internal:9000/callback` for a callback receiver on your host machine. Use the receiver service name when both containers share a Docker network. `localhost` inside the backend container refers to that container; it only reaches a host receiver when running the Rust server natively on the same machine.
 
 ### Point the existing SDKs at localhost
 
@@ -122,17 +144,6 @@ $client = new Client(
 );
 ```
 
-Use the updated local SDK checkouts (or a release containing these options). Existing published versions may not have custom base URL support yet. The scripts below exercise the regular client transports directly:
-
-```sh
-# Start this simulator first with its default merchant/token/settings.
-# Build the TypeScript SDK dist once if needed.
-node scripts/typescript-smoke.mjs /absolute/path/to/flexpay
-php scripts/php-smoke.php /absolute/path/to/flexpay-php
-```
-
-Both examples exercise mobile, check, payout, and card creation with the real clients and their normal HTTP transports. Set `FLEXPAY_SIMULATOR_URL` for a different local address. No SDK transport patching is performed.
-
 ## Storage and scope
 
 **Reset transactions** in the dashboard deletes transaction history and callback logs, retaining your test rules/settings. Background completion cannot recreate deleted rows. Restarting preserves stored transactions/settings; timers and callback jobs are not durable. Payments interrupted before completion remain pending and can be resolved manually after restart.
@@ -144,45 +155,3 @@ This is a local development tool. Dashboard management endpoints under `/api/sim
 ```sh
 make check
 ```
-
-Runs Rust formatting, Clippy, HTTP integration tests, frontend type checking, frontend contract/validation tests, and a production SPA build. Integration tests cover success/failure/pending, payout, both card URL naming styles, cancellation, callbacks/replay, auth/validation, refund transitions, decimal precision, SQLite persistence, and reset while completion is scheduled.
-
-The frontend uses [TanStack Start SPA mode](https://tanstack.com/start/latest/docs/framework/react/guide/spa-mode) and official [shadcn/ui registry components](https://ui.shadcn.com/docs/cli) with Base UI, the default Nova preset, neutral theme, and unchanged component variants. Only static client output is served by Rust.
-
-### Rust structure
-
-`src/lib.rs` exposes the application state, router, models, and store. The implementation is organized by responsibility:
-
-- `src/http/` wires routes and extracts HTTP requests. Handlers are grouped into payment, checkout, transaction, and simulator endpoints; authorization has its own module.
-- `src/payments/` coordinates payment creation, checkout decisions, delayed completion, and the callbacks triggered by a completed transaction.
-- `src/model/` owns payment request validation, exact decimal amounts, simulation rules, transaction construction, state transitions, and FlexPay response payloads.
-- `src/callbacks.rs` delivers callbacks and records delivery attempts. `src/store.rs` owns SQLite access and atomic transaction updates.
-- `src/app.rs` constructs shared state and tracked tasks. `src/cli.rs` defines command-line configuration; `src/main.rs` starts the server and handles shutdown.
-
-The `tests/flows.rs` test target assembles shared fixtures from `tests/common/` and scenarios from `tests/scenarios/`, grouped by payments, checkout, callbacks, persistence, and amounts. The public Rust entry points and FlexPay HTTP contracts are unchanged.
-
-### Frontend structure
-
-Routes in `frontend/src/routes/` connect URLs to the shared dashboard layout and page components. `/` shows transactions, `/gateway` creates test payments, `/settings` configures the simulator, and `/checkout/$id` hosts a card checkout. Components in `src/pages/` only compose feature components; they contain no requests, form state, or table logic.
-
-Feature components and hooks live in `src/features/{transactions,gateway,settings,checkout}/`. Shared presentation components live in `src/components/shared/`, alongside the generated shadcn primitives in `src/components/ui/`.
-
-- TanStack Query owns server data, request cancellation, polling, and mutation invalidation. Query definitions live in `src/lib/queries.ts`; forms keep their own mutation hooks with the corresponding feature.
-- TanStack Table owns transaction sorting, filtering, and pagination. Columns, toolbar, pagination, details, and callbacks are separate components.
-- TanStack Form owns payment, checkout, and settings values, validation, array rules, dirty state, and submission.
-- TanStack Store owns shared UI state: transaction search/status, selection, the reset dialog, and live updates. Its provider creates a store per app instance; API data stays in Query.
-
-`bun run --cwd frontend test` checks payment request compatibility and validation rules. `make check` includes these checks.
-
-### UI generation
-
-Use these commands from `frontend/` to initialize Base UI and generate the components and dashboard layout:
-
-```sh
-bunx --bun shadcn@latest init --base base --preset nova --template start --force --yes --no-monorepo --no-reinstall
-bunx --bun shadcn@latest add button input label card badge table sheet alert-dialog select tabs alert separator --yes --overwrite
-bunx --bun shadcn@latest add sidebar-07 --yes
-```
-
-`components.json` records `style: "base-nova"`. Files in `src/components/ui/` are generated from the official registry. The sidebar-07 application components are adapted to the simulator's pages and merchant details. Layout and page composition live outside the generated primitives. To add another component, run `bunx --bun shadcn@latest add <component>` from `frontend/`.
-

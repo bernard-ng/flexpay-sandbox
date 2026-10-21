@@ -1,0 +1,63 @@
+name: flexpay_sandbox
+
+services:
+  backend:
+    build:
+      context: ./backend
+    environment:
+      FLEXPAY_BIND: 0.0.0.0:8080
+      FLEXPAY_PUBLIC_URL: ${FLEXPAY_PUBLIC_URL:-http://localhost:${FLEXPAY_PORT:-8080}}
+      FLEXPAY_MERCHANT: ${FLEXPAY_MERCHANT:-TESTMERCHANT}
+      FLEXPAY_TOKEN: ${FLEXPAY_TOKEN:-test-token}
+      FLEXPAY_DATABASE: /app/data/flexpay.db
+      FLEXPAY_FRONTEND: /app/frontend
+      RUST_LOG: ${RUST_LOG:-flexpay_sandbox=info}
+    volumes:
+      - sandbox-data:/app/data
+    extra_hosts:
+      - host.docker.internal:host-gateway
+    stop_signal: SIGINT
+    stop_grace_period: 15s
+    develop:
+      watch:
+        - action: rebuild
+          path: ./backend/src
+        - action: rebuild
+          path: ./backend/Cargo.toml
+        - action: rebuild
+          path: ./backend/Cargo.lock
+        - action: rebuild
+          path: ./backend/Dockerfile
+
+  frontend:
+    build:
+      context: ./frontend
+    init: true
+    environment:
+      FLEXPAY_API_URL: http://backend:8080
+    ports:
+      - 127.0.0.1:${FLEXPAY_PORT:-8080}:8080
+    depends_on:
+      backend:
+        condition: service_healthy
+    develop:
+      watch:
+        - action: sync
+          path: ./frontend/src
+          target: /app/src
+          initial_sync: true
+          ignore:
+            - routeTree.gen.ts
+        - action: rebuild
+          path: ./frontend/package.json
+        - action: rebuild
+          path: ./frontend/bun.lock
+        - action: rebuild
+          path: ./frontend/vite.config.ts
+        - action: rebuild
+          path: ./frontend/tsconfig.json
+        - action: rebuild
+          path: ./frontend/Dockerfile
+
+volumes:
+  sandbox-data:

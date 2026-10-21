@@ -1,4 +1,6 @@
 /target
+/backend/target
+/backend/data
 /data
 .env
 /frontend/node_modules

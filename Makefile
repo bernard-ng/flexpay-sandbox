@@ -1,14 +1,9 @@
-.PHONY: setup run frontend-dev check
-setup:
-	bun install --cwd frontend --frozen-lockfile
-	bun run --cwd frontend build
-run:
-	cargo run
-	bun run --cwd frontend dev
+.PHONY: check
+
 check:
-	cargo fmt --check
-	cargo clippy --all-targets -- -D warnings
-	cargo test
+	cargo fmt --manifest-path backend/Cargo.toml --check
+	cargo clippy --manifest-path backend/Cargo.toml --all-targets -- -D warnings
+	cargo test --manifest-path backend/Cargo.toml --locked
 	bun run --cwd frontend typecheck
 	bun run --cwd frontend test
 	bun run --cwd frontend build

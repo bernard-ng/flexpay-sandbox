@@ -1,5 +1,5 @@
 {
-  "name": "flexpay-simulator-dashboard",
+  "name": "flexpay-sandbox-dashboard",
   "private": true,
   "type": "module",
   "scripts": {

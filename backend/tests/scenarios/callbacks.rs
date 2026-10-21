@@ -1,7 +1,7 @@
 use std::time::Duration;
 
 use axum::{Json, Router, routing::post};
-use flexpay_proxy::model::Settings;
+use flexpay_sandbox::model::Settings;
 use reqwest::Client;
 use serde_json::{Value, json};
 use tokio::sync::mpsc;

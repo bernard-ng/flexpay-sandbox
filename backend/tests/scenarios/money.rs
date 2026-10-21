@@ -1,4 +1,4 @@
-use flexpay_proxy::model::amount_cents;
+use flexpay_sandbox::model::amount_cents;
 use serde_json::json;
 
 #[test]
