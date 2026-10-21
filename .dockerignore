@@ -1,0 +1,14 @@
+.git
+.agents
+**/target
+**/node_modules
+**/dist
+**/.tanstack
+**/.output
+**/data
+**/.env
+**/.env.*
+**/*.db
+**/*.db-shm
+**/*.db-wal
+**/*.log

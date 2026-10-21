@@ -1,0 +1,21 @@
+name: flexpay_sandbox
+
+services:
+  sandbox:
+    image: ${FLEXPAY_IMAGE:-ghcr.io/bernard-ng/flexpay-sandbox:latest}
+    ports:
+      - 127.0.0.1:${FLEXPAY_PORT:-8080}:8080
+    environment:
+      FLEXPAY_PUBLIC_URL: ${FLEXPAY_PUBLIC_URL:-http://localhost:${FLEXPAY_PORT:-8080}}
+      FLEXPAY_MERCHANT: ${FLEXPAY_MERCHANT:-TESTMERCHANT}
+      FLEXPAY_TOKEN: ${FLEXPAY_TOKEN:-test-token}
+      RUST_LOG: ${RUST_LOG:-flexpay_sandbox=info}
+    volumes:
+      - sandbox-data:/app/data
+    extra_hosts:
+      - host.docker.internal:host-gateway
+    stop_signal: SIGINT
+    stop_grace_period: 15s
+
+volumes:
+  sandbox-data:

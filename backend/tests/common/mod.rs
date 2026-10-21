@@ -5,6 +5,10 @@ use reqwest::Client;
 use serde_json::{Value, json};
 
 pub(crate) async fn server() -> (String, Arc<AppState>) {
+    server_with_frontend("/nonexistent").await
+}
+
+pub(crate) async fn server_with_frontend(frontend: &str) -> (String, Arc<AppState>) {
     let listener = tokio::net::TcpListener::bind("127.0.0.1:0").await.unwrap();
     let base = format!("http://{}", listener.local_addr().unwrap());
     let state = AppState::new(
@@ -23,7 +27,7 @@ pub(crate) async fn server() -> (String, Arc<AppState>) {
         .await
         .unwrap();
 
-    let app = router(state.clone(), "/nonexistent");
+    let app = router(state.clone(), frontend);
     tokio::spawn(async move {
         axum::serve(listener, app).await.unwrap();
     });

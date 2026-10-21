@@ -48,8 +48,7 @@ pub fn router(state: Arc<AppState>, frontend: &str) -> Router {
         )
         .route("/api/simulator/reset", post(simulator::reset))
         .fallback_service(
-            ServeDir::new(frontend)
-                .not_found_service(ServeFile::new(format!("{frontend}/_shell.html"))),
+            ServeDir::new(frontend).fallback(ServeFile::new(format!("{frontend}/_shell.html"))),
         )
         .with_state(state)
 }

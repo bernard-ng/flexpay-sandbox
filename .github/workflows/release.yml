@@ -1,0 +1,122 @@
+name: Release
+
+on:
+  push:
+    tags: ["v*"]
+
+permissions:
+  contents: read
+
+concurrency:
+  group: release-${{ github.ref }}
+  cancel-in-progress: false
+
+jobs:
+  checks:
+    uses: ./.github/workflows/checks.yml
+
+  publish:
+    name: Publish image and GitHub release
+    needs: checks
+    runs-on: ubuntu-24.04
+    timeout-minutes: 60
+    permissions:
+      contents: write
+      packages: write
+    env:
+      GH_TOKEN: ${{ github.token }}
+      RELEASE_TAG: ${{ github.ref_name }}
+    steps:
+      - uses: actions/checkout@v7
+
+      - name: Prepare release version
+        id: version
+        shell: bash
+        run: |
+          if [[ ! "$RELEASE_TAG" =~ ^v[0-9]+\.[0-9]+\.[0-9]+(-[0-9A-Za-z.-]+)?$ ]]; then
+            echo "Expected a version tag such as v0.1.0 or v0.1.0-rc.1" >&2
+            exit 1
+          fi
+
+          echo "image=ghcr.io/${GITHUB_REPOSITORY,,}" >> "$GITHUB_OUTPUT"
+
+          if [[ "$RELEASE_TAG" == *-* ]]; then
+            echo "stable=false" >> "$GITHUB_OUTPUT"
+          else
+            echo "stable=true" >> "$GITHUB_OUTPUT"
+          fi
+
+      - uses: docker/setup-qemu-action@v4
+
+      - uses: docker/setup-buildx-action@v4
+
+      - name: Log in to GitHub Container Registry
+        uses: docker/login-action@v4
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ github.token }}
+
+      - name: Image tags and labels
+        id: meta
+        uses: docker/metadata-action@v6
+        with:
+          images: ${{ steps.version.outputs.image }}
+          flavor: latest=false
+          tags: |
+            type=ref,event=tag
+            type=semver,pattern={{version}}
+            type=raw,value=latest,enable=${{ steps.version.outputs.stable }}
+
+      - name: Build and publish packaged sandbox
+        id: image
+        uses: docker/build-push-action@v7
+        with:
+          context: .
+          target: release
+          platforms: linux/amd64,linux/arm64
+          push: true
+          tags: ${{ steps.meta.outputs.tags }}
+          labels: ${{ steps.meta.outputs.labels }}
+          cache-from: |
+            type=gha,scope=sandbox-release
+            type=gha,scope=sandbox-amd64
+          cache-to: type=gha,mode=max,scope=sandbox-release
+
+      - name: Create release and attach standalone Compose file
+        env:
+          IMAGE: ${{ steps.version.outputs.image }}
+          IMAGE_DIGEST: ${{ steps.image.outputs.digest }}
+          STABLE: ${{ steps.version.outputs.stable }}
+        shell: bash
+        run: |
+          mkdir -p release
+
+          # Each release asset defaults to the exact image published by this run.
+          sed "s|ghcr.io/bernard-ng/flexpay-sandbox:latest|$IMAGE@$IMAGE_DIGEST|" \
+            compose.prod.yaml > release/compose.prod.yaml
+
+          cat > release/notes.md <<'EOF'
+          Run the sandbox without cloning the source:
+
+          1. Download the attached `compose.prod.yaml` into an empty directory.
+          2. Run `docker compose -f compose.prod.yaml up -d`.
+          3. Open http://localhost:8080.
+
+          The image includes the Rust API and compiled dashboard for Linux AMD64 and ARM64.
+          SQLite history is kept in a named volume.
+
+          EOF
+
+          printf '\nImage: `%s:%s`\nDigest: `%s`\n' \
+            "$IMAGE" "$RELEASE_TAG" "$IMAGE_DIGEST" >> release/notes.md
+
+          options=()
+
+          if [[ "$STABLE" == false ]]; then
+            options+=(--prerelease --latest=false)
+          fi
+
+          gh release create "$RELEASE_TAG" release/compose.prod.yaml \
+            --verify-tag --title "$RELEASE_TAG" \
+            --notes-file release/notes.md --generate-notes "${options[@]}"
